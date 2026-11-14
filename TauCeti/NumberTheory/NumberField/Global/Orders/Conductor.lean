@@ -3,6 +3,8 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Vendored from Tau Ceti (https://github.com/TauCetiProject/TauCeti, commit 97a5b23586f9, module
+-- TauCeti.NumberTheory.NumberField.Global.Orders.Conductor), Apache-2.0.
 module
 
 public import TauCeti.NumberTheory.NumberField.Global.Orders.Basic
@@ -67,6 +69,21 @@ theorem conductor_le_order (O : NumberFieldOrder K) {x : 𝓞 K}
 theorem conductor_le_toRingOfIntegers (O : NumberFieldOrder K) :
     (O.conductor : Set (𝓞 K)) ⊆ O.toRingOfIntegers :=
   fun _ hx ↦ O.mem_toRingOfIntegers.mpr (O.conductor_le_order hx)
+
+/-- An algebraic integer congruent to one modulo the conductor lies in the order. -/
+theorem mem_toRingOfIntegers_of_sub_one_mem_conductor (O : NumberFieldOrder K) {α : 𝓞 K}
+    (hα : α - 1 ∈ O.conductor) : α ∈ O.toRingOfIntegers := by
+  simpa using O.toRingOfIntegers.add_mem (O.conductor_le_toRingOfIntegers hα)
+    O.toRingOfIntegers.one_mem
+
+/-- An algebraic integer congruent to an element of the order modulo the conductor lies in the
+order. -/
+theorem mem_toRingOfIntegers_of_mk_eq (O : NumberFieldOrder K) {α β : 𝓞 K}
+    (hβ : β ∈ O.toRingOfIntegers)
+    (h : Ideal.Quotient.mk O.conductor α = Ideal.Quotient.mk O.conductor β) :
+    α ∈ O.toRingOfIntegers := by
+  simpa using O.toRingOfIntegers.add_mem
+    (O.conductor_le_toRingOfIntegers (Ideal.Quotient.eq.mp h)) hβ
 
 /-- Every maximal-order ideal contained in an order lies in its conductor. -/
 theorem le_conductor_iff (O : NumberFieldOrder K) (I : Ideal (𝓞 K)) :

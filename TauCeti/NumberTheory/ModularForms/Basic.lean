@@ -3,6 +3,8 @@ Copyright (c) 2026 Chris Birkbeck. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Chris Birkbeck
 -/
+-- Modified for the Z-in-Q kernel: explicit `IsSMulApply … UpperHalfPlane ℂ` arguments (older
+-- Mathlib).
 module
 
 public import Mathlib.NumberTheory.ModularForms.Basic
@@ -338,7 +340,8 @@ lemma coe_ofSlashInvariant (hc : ∀ c, IsCusp c Γ → IsCusp c Γ') (f : Modul
 modular form for `Γ` exactly when it is `Γ`-slash invariant. -/
 lemma mem_range_restrictₗ_iff {R : Type*} [Semiring R] [SMul R ℂ]
     [Module R (ModularForm Γ k)] [Module R (ModularForm Γ' k)]
-    [IsSMulApply R (ModularForm Γ k)] [IsSMulApply R (ModularForm Γ' k)] (h : Γ' ≤ Γ)
+    [IsSMulApply R (ModularForm Γ k) UpperHalfPlane ℂ]
+    [IsSMulApply R (ModularForm Γ' k) UpperHalfPlane ℂ] (h : Γ' ≤ Γ)
     (hc : ∀ c, IsCusp c Γ → IsCusp c Γ') (f : ModularForm Γ' k) :
     f ∈ LinearMap.range (restrictₗ k R h) ↔ ∀ γ ∈ Γ, ⇑f ∣[k] γ = ⇑f :=
   ⟨by rintro ⟨g, rfl⟩ γ hγ; exact g.slash_action_eq' γ hγ,
@@ -390,7 +393,8 @@ section restrictₗ
 
 variable (k) (R : Type*) [Semiring R] [SMul R ℂ]
   [Module R (CuspForm Γ k)] [Module R (CuspForm Γ' k)]
-  [IsSMulApply R (CuspForm Γ k)] [IsSMulApply R (CuspForm Γ' k)]
+  [IsSMulApply R (CuspForm Γ k) UpperHalfPlane ℂ]
+  [IsSMulApply R (CuspForm Γ' k) UpperHalfPlane ℂ]
 
 /-- Mathlib's restriction `CuspForm.restrict` bundled as a linear map, the cusp-form analogue of
 Mathlib's `ModularForm.restrictₗ`. The typeclass assumptions are satisfied for `R = ℝ` and any
@@ -427,7 +431,8 @@ lemma coe_ofSlashInvariant (hc : ∀ c, IsCusp c Γ → IsCusp c Γ') (f : CuspF
 form for `Γ` exactly when it is `Γ`-slash invariant. -/
 lemma mem_range_restrictₗ_iff {R : Type*} [Semiring R] [SMul R ℂ]
     [Module R (CuspForm Γ k)] [Module R (CuspForm Γ' k)]
-    [IsSMulApply R (CuspForm Γ k)] [IsSMulApply R (CuspForm Γ' k)] (h : Γ' ≤ Γ)
+    [IsSMulApply R (CuspForm Γ k) UpperHalfPlane ℂ]
+    [IsSMulApply R (CuspForm Γ' k) UpperHalfPlane ℂ] (h : Γ' ≤ Γ)
     (hc : ∀ c, IsCusp c Γ → IsCusp c Γ') (f : CuspForm Γ' k) :
     f ∈ LinearMap.range (restrictₗ k R h) ↔ ∀ γ ∈ Γ, ⇑f ∣[k] γ = ⇑f :=
   ⟨by rintro ⟨g, rfl⟩ γ hγ; exact g.slash_action_eq' γ hγ,

@@ -3,9 +3,11 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: added `import TauCeti.MathlibBackport.Sylow` (older Mathlib).
 module
 
 public import TauCeti.Topology.Algebra.Group.Profinite.Sylow.Existence
+import TauCeti.MathlibBackport.Sylow
 import TauCeti.Algebra.Group.Subgroup.Map
 import TauCeti.GroupTheory.QuotientGroup.Map
 

@@ -3,6 +3,7 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: Sylow field `isPGroup` renamed to `isPGroup'` (older Mathlib).
 module
 
 public import TauCeti.NumberTheory.ClassFieldTheory.Formation.Corestriction
@@ -172,7 +173,7 @@ theorem map_eq_zero_of_prime_degree
         (P : Subgroup L.Gal).index • groupCohomology.map (MonoidHom.id L.Gal) (L.repMap φ) 2 y =
           0 := by
       have hP : (P : Subgroup L.Gal).index ≠ 1 := fun h ↦ by
-        have hpq := P.isPGroup
+        have hpq := P.isPGroup'
         rw [Subgroup.index_eq_one.1 h] at hpq
         exact hpg ⟨q, Fact.out, hpq.of_equiv Subgroup.topEquiv⟩
       have hlt : (L.subgroupLayer (P : Subgroup L.Gal)).degree < n := by

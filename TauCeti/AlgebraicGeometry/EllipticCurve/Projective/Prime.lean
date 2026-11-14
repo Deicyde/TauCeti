@@ -3,6 +3,7 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: `prime_X` renamed to `X_prime` (its name in the pinned Mathlib).
 module
 
 public import TauCeti.AlgebraicGeometry.EllipticCurve.Projective.CoordinateRing
@@ -110,7 +111,7 @@ private theorem map_cubic {S : Type*} [CommRing S] (f : R →+* S) :
 private theorem irreducible_cubic [IsDomain R] : Irreducible W'.cubic := by
   -- the cubic is Eisenstein at the prime `Z`
   have hP : (Ideal.span {(X 1 : MvPolynomial (Fin 2) R)}).IsPrime :=
-    Ideal.isPrime_span_singleton_of_prime prime_X
+    Ideal.isPrime_span_singleton_of_prime X_prime
   have hdeg : W'.cubic.natDegree = 3 := Cubic.natDegree_of_a_ne_zero' one_ne_zero
   refine (W'.monic_cubic.isEisensteinAt_of_mem_of_notMem hP.ne_top (fun {n} hn ↦ ?_) ?_).irreducible
     hP W'.monic_cubic.isPrimitive (by lia)

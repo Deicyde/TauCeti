@@ -3,6 +3,8 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: `rfl` added after `simp` in `TauCeti.convergesToOne_iff` (older
+-- Mathlib).
 module
 
 public import Mathlib.GroupTheory.Rank
@@ -118,6 +120,7 @@ theorem convergesToOne_iff {s : Set G} :
   rw [mem_cofinite, ← Set.finite_image_iff Subtype.val_injective.injOn]
   congr!
   simp
+  rfl
 
 /-- Every finite subset converges to one. -/
 theorem _root_.Set.Finite.convergesToOne {s : Set G} (hs : s.Finite) : ConvergesToOne s := by

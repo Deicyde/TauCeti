@@ -3,6 +3,7 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: Sylow field `isPGroup` renamed to `isPGroup'` (older Mathlib).
 module
 
 public import Mathlib.GroupTheory.Sylow
@@ -217,7 +218,7 @@ variable [Fact p.Prime]
 subgroup. -/
 theorem _root_.Sylow.isProPSylow (Q : Sylow p G) [Q.FiniteIndex] :
     IsProPSylow p (Q : Subgroup G) :=
-  isProPSylow_iff_isPGroup_and_not_dvd_index.mpr ⟨Q.isPGroup, Q.not_dvd_index⟩
+  isProPSylow_iff_isPGroup_and_not_dvd_index.mpr ⟨Q.isPGroup', Q.not_dvd_index⟩
 
 section FiniteIndex
 

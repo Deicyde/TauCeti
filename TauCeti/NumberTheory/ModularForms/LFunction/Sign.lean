@@ -3,6 +3,8 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: one proof unfolds `ModularForm.L` (no
+-- `ModularForm.L_apply_of_ne_zero` in the pinned Mathlib).
 module
 
 public import TauCeti.NumberTheory.ModularForms.LFunction.FunctionalEquation
@@ -134,10 +136,9 @@ different from `1`. -/
 theorem L_eq_zero_of_normalizedFrickeOperatorCusp_eq_smul (hk : 0 < k)
     (hε : normalizedFrickeOperatorCusp k f = ε • f) (hsign : Complex.I ^ k * ε ≠ 1) :
     ModularForm.L hk f ((k : ℂ) / 2) = 0 := by
-  have hcenter : (k : ℂ) / 2 ≠ 0 :=
-    div_ne_zero (Int.cast_ne_zero.mpr (ne_of_gt hk)) (by norm_num)
-  rw [ModularForm.L_apply_of_ne_zero hk f hcenter,
-    Λ_eq_zero_of_normalizedFrickeOperatorCusp_eq_smul f hk hε hsign, zero_mul]
+  -- gz-decomp port fix: Mathlib 56a00585 has no `ModularForm.L_apply_of_ne_zero`; there
+  -- `ModularForm.L hk f s = Λ hk f s * (2 / Gammaℂ s)` by definition.
+  rw [ModularForm.L, Λ_eq_zero_of_normalizedFrickeOperatorCusp_eq_smul f hk hε hsign, zero_mul]
 
 end CuspForm
 

@@ -7,13 +7,13 @@ defaultTargets = ["TauCeti"]
 # the platform-independent mapping automatically.
 platformIndependent = true
 
-# Mathlib's `rev` below always stays on "master"; lake-manifest.json carries the exact,
+# Pinned to "v4.35.0" (Mathlib 56a00585) to match the Z-in-Q kernel; upstream keeps "master"; lake-manifest.json carries the exact,
 # reproducible commit used by builds. Dependency automation must update only that manifest pin
 # and the matching toolchain, including for first-known-bad repair PRs.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
-rev = "master"
+rev = "v4.35.0"
 
 # AI-owned: all the mathematics. No sorries (enforced in CI).
 # This glob is AUTHORITATIVE for what gets built and axiom-audited: `lake build` builds

@@ -3,6 +3,7 @@ Copyright (c) 2026 The Tau Ceti contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: The Tau Ceti contributors
 -/
+-- Modified for the Z-in-Q kernel: Sylow field `isPGroup` renamed to `isPGroup'` (older Mathlib).
 module
 
 public import Mathlib.CategoryTheory.CofilteredSystem
@@ -62,7 +63,7 @@ theorem isProPSylow_limitSubgroup (S : ∀ U : OpenNormalSubgroup G, Sylow p (G 
     rw [P.isProP_iff_isPGroup_map_mk']
     intro U
     rw [hPmap U]
-    exact (S U).isPGroup
+    exact (S U).isPGroup'
   refine isProPSylow_iff.mpr ⟨hPclosed, hPpro, fun U ↦ ?_⟩
   rw [hPmap U]
   exact (S U).not_dvd_index
